@@ -12,6 +12,7 @@
 # .gitignores/kancolle-pip.gitignore
 !README.md
 !LICENSE.*
+!PRIVACY.md
 
 !content.js
 !styles.css
