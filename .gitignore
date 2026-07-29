@@ -1,0 +1,18 @@
+# project:kancolle-PIP
+*
+!.gitignore
+# ---AUTO-Generated---
+# .gitignores/.github.gitignore
+!.github/
+!.github/workflows/
+!.github/workflows/**
+# .gitignores/icons.gitignore
+!icons/
+!icons/**
+# .gitignores/kancolle-pip.gitignore
+!README.md
+!LICENSE.*
+
+!content.js
+!styles.css
+!manifest.json

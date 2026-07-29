@@ -1,0 +1,28 @@
+name: Build and Release Extension
+
+on:
+  push:
+    tags:
+      - 'v*' # v1.0.0 みたいなタグがプッシュされた時だけ発火するよ
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Releaseを作成・ファイルを添付するための権限
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build ZIP file
+        # 拡張機能に必要なファイルだけをZIP化。不要なものは -x で弾くよ
+        run: |
+          zip -r kancolle-pip-extension.zip . -x "*.git*" -x ".github/*" -x "README.md"
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # タグ名でReleaseページを作り、自動生成の更新履歴と一緒にZIPを添付する
+        run: |
+          gh release create ${{ github.ref_name }} kancolle-pip-extension.zip --title "Release ${{ github.ref_name }}" --generate-notes
